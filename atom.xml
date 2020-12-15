@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-12-15T10:21:36.639Z</updated>
+  <updated>2020-12-15T10:28:48.158Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://example.com/2020/12/15/Apache-Doris-Metadata-Management/"/>
     <id>http://example.com/2020/12/15/Apache-Doris-Metadata-Management/</id>
     <published>2020-12-15T06:32:19.000Z</published>
-    <updated>2020-12-15T10:21:36.639Z</updated>
+    <updated>2020-12-15T10:28:48.158Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Metadata视图"><a href="#Metadata视图" class="headerlink" title="Metadata视图"></a>Metadata视图</h2><ul><li>Metadata的几种存在形式<ul><li>Memory， 内存中的全量数据，用于处理metadata相关的请求</li><li>Image，对历史数据的一次归档，作为恢复Memory的Base</li><li>BDBJE，对memory中metadata的修改会产生changelog，记录metadata的增量</li></ul></li><li>Master Node Memory中的Metadata是最新的，对于metadata的change总是会先修改master的memory 然后再通过BDBJE同步到其他节点   </li><li>除了memory中的metadata，任何FE节点的Image + BDBJE中的changelog 可以回放出一份和master memory中相同的metadata </li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="Metadata视图"><a href="#Metadata视图" class="headerlink" title="Metadata视图"></a>Metadata视图</h2><ul><li>Metadata的几种存在形式<ul><li>Memory， 内存中的全量数据，用于处理metadata相关的请求</li><li>Image，对历史数据的一次归档，作为恢复Memory的Base</li><li>BDBJE，对memory中metadata的修改会产生changelog，记录metadata的增量</li></ul></li><li>Master Node Memory中的Metadata是最新的，对于metadata的change总是会先修改master的memory 然后再通过BDBJE同步到其他节点   </li><li>除了memory中的metadata，任何FE节点的Image + BDBJE中的changelog 可以回放出一份和master memory中相同的metadata </li></ul><h2 id="Metadata写入和消费"><a href="#Metadata写入和消费" class="headerlink" title="Metadata写入和消费"></a>Metadata写入和消费</h2><ul><li>对metadata的修改，请求会落到FE的Master节点，Master节点先修改memory中的meta，然后通过BDBJE写出一条change log，BDBJE会将changelog同步到其他节点上</li><li>对于非master node，进程中会启动一个Replay线程，周期性的从BDBJE获取changelog，然后直接修改本地memory中的metadata</li></ul>]]></content>
     
     
       

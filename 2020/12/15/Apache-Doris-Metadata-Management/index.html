@@ -9,4 +9,8 @@
 <li>Master Node Memory中的Metadata是最新的，对于metadata的change总是会先修改master的memory 然后再通过BDBJE同步到其他节点   </li>
 <li>除了memory中的metadata，任何FE节点的Image + BDBJE中的changelog 可以回放出一份和master memory中相同的metadata </li>
 </ul>
+<h2 id="Metadata写入和消费"><a href="#Metadata写入和消费" class="headerlink" title="Metadata写入和消费"></a>Metadata写入和消费</h2><ul>
+<li>对metadata的修改，请求会落到FE的Master节点，Master节点先修改memory中的meta，然后通过BDBJE写出一条change log，BDBJE会将changelog同步到其他节点上</li>
+<li>对于非master node，进程中会启动一个Replay线程，周期性的从BDBJE获取changelog，然后直接修改本地memory中的metadata</li>
+</ul>
 </div></article></div></main><footer><div class="paginator"><a href="/2020/12/12/First-Test/" class="next">NEXT</a></div><div class="copyright"><p>© 2020 <a href="http://example.com">Xpray</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
