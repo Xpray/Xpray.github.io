@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-01-07T06:25:43.658Z</updated>
+  <updated>2021-01-24T09:41:30.896Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Sequential Consistency</title>
+    <link href="http://example.com/2021/01/24/Sequential-Consistency/"/>
+    <id>http://example.com/2021/01/24/Sequential-Consistency/</id>
+    <published>2021-01-24T09:28:46.000Z</published>
+    <updated>2021-01-24T09:41:30.896Z</updated>
+    
+    <content type="html"><![CDATA[<p>Sequential Consistency 是比Strong Consistency稍弱的一致性模型，可以按照如下方式来理解。<br>对于Single Object，R(x), W(y)分别表示从该Object读到了value x和写入了value y，考虑以下两个场景：</p><p>场景1:<br>Process A: W(1)<br>Process B: W(5)<br>Process B: R(5)<br>Process A: R(1)</p><p>场景2:<br>Process A: W(1)<br>Process A: W(3)<br>Process B: R(1)<br>Process B: R(3)</p><p>从全局来看，这个系统本身是不完美的（非强一致），但是这两个场景是可以找到一个调度顺序使其满足Sequential Consistency<br>对于场景1，系统可以如下调度W(1)，R(1)，W(5)，R(5)。<br>对于场景2，系统可以如下调度W(1)，R(1)，W(3)，R(3)。</p><p>这两度调度方式都不破坏Process内部的相对顺序，使其从Process内部的视角看来是正确的。<br>这就是Sequential Consistency的关键性质。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Sequential Consistency 是比Strong Consistency稍弱的一致性模型，可以按照如下方式来理解。&lt;br&gt;对于Single Object，R(x), W(y)分别表示从该Object读到了value x和写入了value y，考虑以下两个场景：</summary>
+      
+    
+    
+    
+    
+    <category term="Consistency" scheme="http://example.com/tags/Consistency/"/>
+    
+  </entry>
   
   <entry>
     <title>MIT6.824</title>
